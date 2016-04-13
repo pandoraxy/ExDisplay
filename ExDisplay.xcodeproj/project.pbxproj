@@ -15,6 +15,9 @@
 		92AD8EB11CBB413300C6EF14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92AD8EAF1CBB413300C6EF14 /* LaunchScreen.storyboard */; };
 		92AD8EBC1CBB413300C6EF14 /* ExDisplayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD8EBB1CBB413300C6EF14 /* ExDisplayTests.swift */; };
 		92AD8EC71CBB413300C6EF14 /* ExDisplayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92AD8EC61CBB413300C6EF14 /* ExDisplayUITests.swift */; };
+		AAD776261CBDF0EF008147C6 /* ExAuto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD776251CBDF0EF008147C6 /* ExAuto.framework */; };
+		AAD776271CBDF0F4008147C6 /* ExAuto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAD776251CBDF0EF008147C6 /* ExAuto.framework */; };
+		AAD776281CBDF0F4008147C6 /* ExAuto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = AAD776251CBDF0EF008147C6 /* ExAuto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +37,20 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		AAD776291CBDF0F4008147C6 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				AAD776281CBDF0F4008147C6 /* ExAuto.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		92AD8EA01CBB413300C6EF14 /* ExDisplay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExDisplay.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		92AD8EA31CBB413300C6EF14 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +66,7 @@
 		92AD8EC21CBB413300C6EF14 /* ExDisplayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExDisplayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92AD8EC61CBB413300C6EF14 /* ExDisplayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExDisplayUITests.swift; sourceTree = "<group>"; };
 		92AD8EC81CBB413300C6EF14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AAD776251CBDF0EF008147C6 /* ExAuto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExAuto.framework; path = "../../../Library/Developer/Xcode/DerivedData/ExDisplay-bravmfmucasaogekejsbekwfniac/Build/Products/Debug-iphonesimulator/ExAuto.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAD776271CBDF0F4008147C6 /* ExAuto.framework in Frameworks */,
+				AAD776261CBDF0EF008147C6 /* ExAuto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -106,6 +126,7 @@
 				92AD8EAF1CBB413300C6EF14 /* LaunchScreen.storyboard */,
 				92AD8EB21CBB413300C6EF14 /* Info.plist */,
 				92AD8EAA1CBB413300C6EF14 /* ExDisplay.xcdatamodeld */,
+				AAD776251CBDF0EF008147C6 /* ExAuto.framework */,
 			);
 			path = ExDisplay;
 			sourceTree = "<group>";
@@ -138,6 +159,7 @@
 				92AD8E9C1CBB413300C6EF14 /* Sources */,
 				92AD8E9D1CBB413300C6EF14 /* Frameworks */,
 				92AD8E9E1CBB413300C6EF14 /* Resources */,
+				AAD776291CBDF0F4008147C6 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -488,6 +510,7 @@
 				92AD8ECD1CBB413300C6EF14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		92AD8ECE1CBB413300C6EF14 /* Build configuration list for PBXNativeTarget "ExDisplayTests" */ = {
 			isa = XCConfigurationList;
@@ -496,6 +519,7 @@
 				92AD8ED01CBB413300C6EF14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		92AD8ED11CBB413300C6EF14 /* Build configuration list for PBXNativeTarget "ExDisplayUITests" */ = {
 			isa = XCConfigurationList;
@@ -504,6 +528,7 @@
 				92AD8ED31CBB413300C6EF14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
