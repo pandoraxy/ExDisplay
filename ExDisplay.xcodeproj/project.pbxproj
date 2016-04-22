@@ -49,13 +49,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		F6FC726B1CBE1F2300BB9871 /* Embed Frameworks */ = {
+		843481271CC9ED7C00BEC03D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F6FC726A1CBE1F2300BB9871 /* ExAuto.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -96,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6FC72691CBE1F2300BB9871 /* ExAuto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +170,6 @@
 		92AD8E971CBB413300C6EF14 = {
 			isa = PBXGroup;
 			children = (
-				F6FC72681CBE1F2300BB9871 /* ExAuto.framework */,
 				92AD8EA21CBB413300C6EF14 /* ExDisplay */,
 				92AD8EBA1CBB413300C6EF14 /* ExDisplayTests */,
 				92AD8EC51CBB413300C6EF14 /* ExDisplayUITests */,
@@ -206,7 +203,6 @@
 				92AD8EAF1CBB413300C6EF14 /* LaunchScreen.storyboard */,
 				92AD8EB21CBB413300C6EF14 /* Info.plist */,
 				92AD8EAA1CBB413300C6EF14 /* ExDisplay.xcdatamodeld */,
-				AAD776251CBDF0EF008147C6 /* ExAuto.framework */,
 			);
 			path = ExDisplay;
 			sourceTree = "<group>";
@@ -239,7 +235,7 @@
 				92AD8E9C1CBB413300C6EF14 /* Sources */,
 				92AD8E9D1CBB413300C6EF14 /* Frameworks */,
 				92AD8E9E1CBB413300C6EF14 /* Resources */,
-				F6FC726B1CBE1F2300BB9871 /* Embed Frameworks */,
+				843481271CC9ED7C00BEC03D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -471,6 +467,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_INCLUDE_PATHS = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -519,6 +516,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExDisplay",
+				);
 				INFOPLIST_FILE = ExDisplay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appstudio.ExDisplay;
@@ -530,6 +531,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExDisplay",
+				);
 				INFOPLIST_FILE = ExDisplay/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appstudio.ExDisplay;
@@ -541,6 +546,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExDisplay",
+				);
 				INFOPLIST_FILE = ExDisplayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appstudio.ExDisplayTests;
@@ -553,6 +562,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExDisplay",
+				);
 				INFOPLIST_FILE = ExDisplayTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appstudio.ExDisplayTests;
@@ -564,6 +577,10 @@
 		92AD8ED21CBB413300C6EF14 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExDisplay",
+				);
 				INFOPLIST_FILE = ExDisplayUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appstudio.ExDisplayUITests;
@@ -575,6 +592,10 @@
 		92AD8ED31CBB413300C6EF14 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/ExDisplay",
+				);
 				INFOPLIST_FILE = ExDisplayUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.appstudio.ExDisplayUITests;
