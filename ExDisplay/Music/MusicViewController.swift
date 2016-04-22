@@ -41,10 +41,11 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
             let songs = mediaItemCollection.items
             let playingItem = songs[0] as MPMediaItem
             musicPlayer.setMediaPlayerWithItemCollection(mediaItemCollection, nowPlayingItem: playingItem)
-        }
-        for item in mediaItemCollection.items {
-            let musicName = item.valueForProperty(MPMediaItemPropertyTitle)
-            musicListNameArray.addObject(musicName!)
+            
+            for item in mediaItemCollection.items {
+                let musicName = item.valueForProperty(MPMediaItemPropertyTitle)
+                musicListNameArray.addObject(musicName!)
+            }
         }
     }
     
@@ -60,7 +61,10 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
         let playTitleLabelConstraints: NSArray = [playTitleLabelContrainTop,playTitleLabelContrainLeft,playTitleLabelContrainRight,playTitleLabelContrainHeight]
         self.view.addConstraints(playTitleLabelConstraints as! [NSLayoutConstraint])
         playTitleLabel.textAlignment = .Center
-        playTitleLabel.text = musicListNameArray[0] as? String
+        if musicListNameArray.count > 0 {
+            playTitleLabel.text = musicListNameArray[0] as? String
+        }
+        playTitleLabel.text = nil
         // 初始化MusicPlayerView
         self.view.backgroundColor = UIColor.whiteColor()
         musicPlayerView = MusicPlayerView.init(frame: CGRect(x: 0, y: UIScreen.mainScreen().bounds.size.height - 60, width: UIScreen.mainScreen().bounds.size.width, height: 60))
@@ -85,12 +89,16 @@ class MusicViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func handlePlayStatusButtonClick(sender: UIButton) -> Void {
         switch sender {
         case musicPlayerView.playPauseButton:
-            if isPlaying {
-                isPlaying = false
-                musicPlayer.musicPause()
-            } else {
-                isPlaying = true
-                musicPlayer.musicPlay()
+            if musicListNameArray.count == 0 {
+                return
+            } else{
+                if isPlaying {
+                    isPlaying = false
+                    musicPlayer.musicPause()
+                } else {
+                    isPlaying = true
+                    musicPlayer.musicPlay()
+                }
             }
             break
         case musicPlayerView.playNextButton:

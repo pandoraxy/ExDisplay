@@ -57,6 +57,7 @@ class MusicPlayerView: UIView {
         let playPauseButtonContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: playPauseButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 40.0)
         let playPauseButtonContrains: NSArray = [playPauseButtonContrainTop, playPauseButtonContrainWidth, playPauseButtonContrainHeight, playPauseButtonContrainLeading]
         self.addConstraints(playPauseButtonContrains as! [NSLayoutConstraint])
+        playPauseButton.setBackgroundImage(UIImage(named: "homeMusic-play"), forState: .Normal)
         
         playNextButton.translatesAutoresizingMaskIntoConstraints = false
         let playNextButtonContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: playNextButton, attribute: .Leading, relatedBy: .Equal, toItem: playPauseButton, attribute: .Trailing, multiplier: 1.0, constant: 10.0)
