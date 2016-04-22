@@ -9,7 +9,7 @@
 import UIKit
 import ExAuto
 
-class ViewController: UIViewController {
+class ContactsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

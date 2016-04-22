@@ -9,7 +9,7 @@
 import UIKit
 import ExAuto
 
-class ViewController: UIViewController {
+class VRViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

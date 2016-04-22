@@ -9,7 +9,7 @@
 import UIKit
 import ExAuto
 
-class ViewController: UIViewController {
+class WeatherViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
