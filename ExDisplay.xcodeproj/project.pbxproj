@@ -27,8 +27,8 @@
 		F63B49C91CC9F1E00046F2FD /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49C81CC9F1E00046F2FD /* MusicPlayer.swift */; };
 		F63B49CB1CC9F1F30046F2FD /* MusicPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49CA1CC9F1F30046F2FD /* MusicPlayerModel.swift */; };
 		F63B49CD1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49CC1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift */; };
-		F6FC72691CBE1F2300BB9871 /* ExAuto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6FC72681CBE1F2300BB9871 /* ExAuto.framework */; };
-		F6FC726A1CBE1F2300BB9871 /* ExAuto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F6FC72681CBE1F2300BB9871 /* ExAuto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F63B49D01CCA252F0046F2FD /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49CF1CCA252F0046F2FD /* WeatherView.swift */; };
+		F63B49D21CCA25E40046F2FD /* EXNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49D11CCA25E40046F2FD /* EXNetworking.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,12 +82,12 @@
 		92AD8EC21CBB413300C6EF14 /* ExDisplayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExDisplayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		92AD8EC61CBB413300C6EF14 /* ExDisplayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExDisplayUITests.swift; sourceTree = "<group>"; };
 		92AD8EC81CBB413300C6EF14 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AAD776251CBDF0EF008147C6 /* ExAuto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExAuto.framework; path = "../../../Library/Developer/Xcode/DerivedData/ExDisplay-bravmfmucasaogekejsbekwfniac/Build/Products/Debug-iphonesimulator/ExAuto.framework"; sourceTree = "<group>"; };
 		F63B49C61CC9F1C60046F2FD /* MusicPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerView.swift; sourceTree = "<group>"; };
 		F63B49C81CC9F1E00046F2FD /* MusicPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayer.swift; sourceTree = "<group>"; };
 		F63B49CA1CC9F1F30046F2FD /* MusicPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerModel.swift; sourceTree = "<group>"; };
 		F63B49CC1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerListTabelView.swift; sourceTree = "<group>"; };
-		F6FC72681CBE1F2300BB9871 /* ExAuto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ExAuto.framework; path = "/Users/lihao/Library/Developer/Xcode/DerivedData/ExDisplay-czvwtxspmbymrqahbcpkyhymaddz/Build/Products/Debug-iphoneos/ExAuto.framework"; sourceTree = "<absolute>"; };
+		F63B49CF1CCA252F0046F2FD /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
+		F63B49D11CCA25E40046F2FD /* EXNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EXNetworking.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +163,8 @@
 			isa = PBXGroup;
 			children = (
 				84E2E0A21CC9BD95002A39F1 /* WeatherViewController.swift */,
+				F63B49CF1CCA252F0046F2FD /* WeatherView.swift */,
+				F63B49D11CCA25E40046F2FD /* EXNetworking.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -362,11 +364,13 @@
 				84E2E0A31CC9BD95002A39F1 /* WeatherViewController.swift in Sources */,
 				84B5583A1CC784F0001065B4 /* MainLauncher.swift in Sources */,
 				84E2E09F1CC9BD82002A39F1 /* MusicViewController.swift in Sources */,
+				F63B49D01CCA252F0046F2FD /* WeatherView.swift in Sources */,
 				84E2E09B1CC9BD71002A39F1 /* PhoneViewController.swift in Sources */,
 				F63B49CD1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift in Sources */,
 				F63B49C71CC9F1C60046F2FD /* MusicPlayerView.swift in Sources */,
 				92AD8EAC1CBB413300C6EF14 /* ExDisplay.xcdatamodeld in Sources */,
 				F63B49CB1CC9F1F30046F2FD /* MusicPlayerModel.swift in Sources */,
+				F63B49D21CCA25E40046F2FD /* EXNetworking.swift in Sources */,
 				92AD8EA61CBB413300C6EF14 /* ViewController.swift in Sources */,
 				92AD8EA41CBB413300C6EF14 /* AppDelegate.swift in Sources */,
 				84E2E09D1CC9BD79002A39F1 /* ContactsViewController.swift in Sources */,
