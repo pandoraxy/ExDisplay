@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844DE3621CCEFD85006579E8 /* ExAuto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 844DE3611CCEFD85006579E8 /* ExAuto.framework */; };
 		84B5583A1CC784F0001065B4 /* MainLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B558391CC784F0001065B4 /* MainLauncher.swift */; };
 		84B5583B1CC784F0001065B4 /* MainLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B558391CC784F0001065B4 /* MainLauncher.swift */; };
 		84B5583C1CC784F0001065B4 /* MainLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B558391CC784F0001065B4 /* MainLauncher.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		844DE3611CCEFD85006579E8 /* ExAuto.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ExAuto.framework; sourceTree = "<group>"; };
 		84B558391CC784F0001065B4 /* MainLauncher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainLauncher.swift; sourceTree = "<group>"; };
 		84E2E09A1CC9BD71002A39F1 /* PhoneViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneViewController.swift; sourceTree = "<group>"; };
 		84E2E09C1CC9BD79002A39F1 /* ContactsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactsViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844DE3621CCEFD85006579E8 /* ExAuto.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +195,7 @@
 		92AD8EA21CBB413300C6EF14 /* ExDisplay */ = {
 			isa = PBXGroup;
 			children = (
+				844DE3611CCEFD85006579E8 /* ExAuto.framework */,
 				84B558321CC7806D001065B4 /* CarScene */,
 				84B558361CC780AC001065B4 /* PhoneScene */,
 				84B558341CC7807A001065B4 /* Contacts */,
