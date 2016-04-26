@@ -8,13 +8,123 @@
 
 import UIKit
 import ExAuto
+import CoreLocation
 
-class WeatherViewController: UIViewController {
+class WeatherViewController: UIViewController, CLLocationManagerDelegate {
+
+    var weatherView = WeatherView()
+    var tempString: AnyObject!
+    var weatherImgURL: AnyObject!
+    var weatherString: AnyObject!
+    var PMString: AnyObject!
+    var carWashIndexZsString: AnyObject!
+    var carWashIndexDesString: AnyObject!
+    
+    // 当前城市
+    var currentCity: NSString!
+    
+    // 当前区
+    var SubLocality: NSString!
+    
+    //保存获取到的本地位置
+    var currentLocation: CLLocation!
+    
+    //用于定位服务管理类，它能够给我们提供位置信息和高度信息，也可以监控设备进入或离开某个区域，还可以获得设备的运行方向
+    let locationManager: CLLocationManager = CLLocationManager()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor.whiteColor()
+        weatherView = WeatherView.init(frame: CGRect(x: 30, y: 100, width: 195, height: 295))
+        self.view.addSubview(weatherView)
         
+        initLocation()
+        networkRequest()
+    }
+    
+    func initLocation() {
+        locationManager.delegate = self
+        locationManager.requestAlwaysAuthorization()
+        
+        //设备使用电池供电时最高的精度
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        //精确到1000米,距离过滤器，定义了设备移动后获得位置信息的最小距离
+        locationManager.distanceFilter = kCLLocationAccuracyKilometer
+        locationManager.startUpdatingLocation()
+    }
+    
+    //MARK:- 实现CLLocationManagerDelegate协议
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last
+        print(currentLocation.coordinate.longitude)
+        print(currentLocation.coordinate.latitude)
+        reverseGeocode()
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
+    }
+    
+    //将经纬度转换为城市名
+    func reverseGeocode() {
+        let geocoder = CLGeocoder()
+        var mark:CLPlacemark?
+        geocoder.reverseGeocodeLocation(currentLocation, completionHandler: { (placemarks, error) -> Void in
+            if (error == nil) {
+                let pm = placemarks! as [CLPlacemark]
+                if (pm.count > 0) {
+                    mark = placemarks![0]
+                    let city: String = (mark!.addressDictionary! as NSDictionary).valueForKey("City") as! String
+                    self.SubLocality = (mark!.addressDictionary! as NSDictionary).valueForKey("SubLocality") as! NSString
+                    
+                    // 去掉“市”字眼
+                    self.currentCity = city.stringByReplacingOccurrencesOfString("市", withString: "")
+                    
+                    let location: String = (self.currentCity as String) + "，" + (self.SubLocality as String)
+                    self.weatherView.locationLabel.text = location
+                }
+            } else {
+                // 转换地理失败
+            }
+        })
+    }
+    
+    private func networkRequest() {
+        let url = "http://api.map.baidu.com/telematics/v3/weather"
+        EXNetworking.get(url, params: ["location": "大连", "output": "json", "ak": "A72e372de05e63c8740b2622d0ed8ab1"], callback: { (data, response, error) -> Void in
+            let string = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
+            let returnData: NSData = string.dataUsingEncoding(NSUTF8StringEncoding)!
+            let jsonDict: AnyObject! = try? NSJSONSerialization.JSONObjectWithData(returnData, options: NSJSONReadingOptions.AllowFragments)
+            
+            self.tempString = (((jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("date")?.componentsSeparatedByString("："))! as NSArray).objectAtIndex(1).componentsSeparatedByString("℃") as NSArray).objectAtIndex(0) as! String + "°"
+            self.weatherImgURL = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("dayPictureUrl")
+            self.weatherString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("weather")
+            self.PMString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("pm25")
+            self.carWashIndexZsString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("index")?.objectAtIndex(1).objectForKey("zs")
+            self.carWashIndexDesString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("index")?.objectAtIndex(1).objectForKey("des")
+            
+            print(self.tempString)
+            print(self.weatherImgURL)
+            print(self.weatherString)
+            print(self.PMString)
+            print(self.carWashIndexZsString)
+            print(self.carWashIndexDesString)
+            
+            dispatch_async(dispatch_get_main_queue(), { 
+                self.weatherView.tempLabel.text = self.tempString as? String
+                self.weatherView.weatherLabel.text = self.weatherString as? String
+                self.weatherView.PMNumLabel.text = self.PMString as? String
+                self.weatherView.carWashIndexZsLabel.text = self.carWashIndexZsString as? String
+                self.weatherView.carWashIndexDesLabel.text = self.carWashIndexDesString as? String
+                
+                let imageUrl: NSURL = NSURL(string: self.weatherImgURL as! String)!
+                let imageData: NSData = NSData(contentsOfURL: imageUrl)!
+                let image = UIImage(data: imageData, scale: 1.0)
+                self.weatherView.weatherImage.image = image
+            })
+        })
     }
 
     override func didReceiveMemoryWarning() {
