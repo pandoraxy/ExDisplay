@@ -59,18 +59,18 @@ class WeatherView: UIView {
         let locationLabelContrains: NSArray = [locationLabelContrainTop, locationLabelContrainWidth, locationLabelContrainHeight, locationLabelContrainLeading]
         self.addConstraints(locationLabelContrains as! [NSLayoutConstraint])
         locationLabel.font = UIFont.systemFontOfSize(13.0)
-        locationLabel.text = "大连，甘井子区"
+        locationLabel.text = "定位中..."
         locationLabel.textColor = UIColor.whiteColor()
         
         tempLabel.translatesAutoresizingMaskIntoConstraints = false
-        let tempLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: tempLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 52.0)
+        let tempLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: tempLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 20.0)
         let tempLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: tempLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 20.0)
         let tempLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: tempLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100.0)
-        let tempLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: tempLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 107.0)
+        let tempLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: tempLabel, attribute: .Width, relatedBy: .Equal, toItem: self, attribute: .Width, multiplier: 1.0, constant: -40.0)
         let tempLabelContrains: NSArray = [tempLabelContrainTop, tempLabelContrainWidth, tempLabelContrainHeight, tempLabelContrainLeading]
         self.addConstraints(tempLabelContrains as! [NSLayoutConstraint])
         tempLabel.font = UIFont.systemFontOfSize(70.0)
-        tempLabel.text = "26°"
+        tempLabel.text = "--"
         tempLabel.textAlignment = .Center
         tempLabel.textColor = UIColor.whiteColor()
         

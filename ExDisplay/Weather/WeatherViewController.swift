@@ -40,7 +40,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         self.view.addSubview(weatherView)
         
         initLocation()
-        networkRequest()
+//        networkRequest()
     }
     
     func initLocation() {
@@ -84,6 +84,8 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                     
                     let location: String = (self.currentCity as String) + "，" + (self.SubLocality as String)
                     self.weatherView.locationLabel.text = location
+                    
+                    self.networkRequest()
                 }
             } else {
                 // 转换地理失败
@@ -93,7 +95,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     
     private func networkRequest() {
         let url = "http://api.map.baidu.com/telematics/v3/weather"
-        EXNetworking.get(url, params: ["location": "大连", "output": "json", "ak": "A72e372de05e63c8740b2622d0ed8ab1"], callback: { (data, response, error) -> Void in
+        EXNetworking.get(url, params: ["location": self.currentCity, "output": "json", "ak": "A72e372de05e63c8740b2622d0ed8ab1"], callback: { (data, response, error) -> Void in
             let string = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
             let returnData: NSData = string.dataUsingEncoding(NSUTF8StringEncoding)!
             let jsonDict: AnyObject! = try? NSJSONSerialization.JSONObjectWithData(returnData, options: NSJSONReadingOptions.AllowFragments)
