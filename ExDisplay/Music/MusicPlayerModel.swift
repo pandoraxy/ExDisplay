@@ -9,8 +9,10 @@
 import Foundation
 import MediaPlayer
 
+/// 播放数据 类
 class MusicPlayerModel: NSObject {
     //MARK: - Properties
+        /// 音乐检索
     var mediaQuery: MPMediaQuery
     
     //MARK: - LifeCycle
@@ -23,6 +25,13 @@ class MusicPlayerModel: NSObject {
     //MARK: - IBActions
     
     //MARK: - Public
+    /**
+     根据音乐类型进行检索
+     
+     - parameter mediaGrouping: 音乐类型(Album,Artist,Songs)
+     
+     - returns: 检索结果（MPMediaItemCollection）
+     */
     func musicMediaItemCollectionWithMediaGrouping(mediaGrouping: MPMediaGrouping) -> MPMediaItemCollection {
         var mediaCollection: MPMediaItemCollection = MPMediaItemCollection.init(items: [MPMediaItem]())
         switch mediaGrouping {
@@ -69,6 +78,15 @@ class MusicPlayerModel: NSObject {
         return mediaCollection
     }
     
+    /**
+     检索专辑
+     
+     - parameter albumTitle: 专辑名
+     - parameter albumID:    专辑ID
+     - parameter artist:     艺术家
+     
+     - returns: 检索结果集合（[MPMediaItemCollection]）
+     */
     func filterMediaCollectionsForAlbum(albumTitle: String?, albumPersistentID albumID: NSNumber?, albumArtist artist: String?) -> [MPMediaItemCollection] {
         var albumTitleFilter: MPMediaPropertyPredicate
         var albumIdFilter: MPMediaPropertyPredicate
@@ -103,6 +121,14 @@ class MusicPlayerModel: NSObject {
         return mediaCollections
     }
     
+    /**
+     检索艺术家
+     
+     - parameter artist:      艺术家名
+     - parameter albumArtist: 专辑艺术家
+     
+     - returns: 检索结果集合（[MPMediaItemCollection]）
+     */
     func filterMediaCollectionsForArtist(artist: String?, albumArtist: String?) -> [MPMediaItemCollection] {
         var mediaCollections: [MPMediaItemCollection] = [MPMediaItemCollection]()
         
