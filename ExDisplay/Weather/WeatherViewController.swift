@@ -43,6 +43,26 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 //        networkRequest()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // 判断定位是否开启
+        let status: CLAuthorizationStatus = CLLocationManager.authorizationStatus()
+        if (CLAuthorizationStatus.Denied == status || CLAuthorizationStatus.Restricted == status) {
+            let alert = UIAlertController(title: "提示", message: "请打开您的位置服务！", preferredStyle: .Alert)
+            let cancleAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            let okAction = UIAlertAction(title: "设置", style: .Default, handler: { (action) in
+                let url: NSURL = NSURL(string: UIApplicationOpenSettingsURLString)!
+                if UIApplication.sharedApplication().canOpenURL(url) {
+                    UIApplication.sharedApplication().openURL(url)
+                }
+            })
+            alert.addAction(cancleAction)
+            alert.addAction(okAction)
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+    
     func initLocation() {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
@@ -67,12 +87,14 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         print(error)
     }
     
-    //将经纬度转换为城市名
+    // 将经纬度转换为城市名
     func reverseGeocode() {
         let geocoder = CLGeocoder()
         var mark:CLPlacemark?
+        
+        // 逆地理转换(坐标 -> 地理)
         geocoder.reverseGeocodeLocation(currentLocation, completionHandler: { (placemarks, error) -> Void in
-            if (error == nil) {
+            if (error == nil) {// 转换成功
                 let pm = placemarks! as [CLPlacemark]
                 if (pm.count > 0) {
                     mark = placemarks![0]
