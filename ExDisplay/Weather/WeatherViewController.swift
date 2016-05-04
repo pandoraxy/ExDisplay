@@ -9,6 +9,7 @@
 import UIKit
 import ExAuto
 import CoreLocation
+import Alamofire
 
 class WeatherViewController: UIViewController, CLLocationManagerDelegate {
 
@@ -19,6 +20,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
     var PMString: AnyObject!
     var carWashIndexZsString: AnyObject!
     var carWashIndexDesString: AnyObject!
+    var activity: UIActivityIndicatorView!
     
     // 当前城市
     var currentCity: NSString!
@@ -39,6 +41,12 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         weatherView = WeatherView.init(frame: CGRect(x: 30, y: 100, width: 195, height: 295))
         self.view.addSubview(weatherView)
         
+        self.activity = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
+        self.activity.center = CGPoint(x: 100, y: 130)
+        self.activity.activityIndicatorViewStyle = .White
+        weatherView.addSubview(self.activity)
+        self.activity.startAnimating()
+        
         initLocation()
 //        networkRequest()
     }
@@ -52,6 +60,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
             let alert = UIAlertController(title: "提示", message: "请打开您的位置服务！", preferredStyle: .Alert)
             let cancleAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
             let okAction = UIAlertAction(title: "设置", style: .Default, handler: { (action) in
+                // 跳转到设置（打开定位）
                 let url: NSURL = NSURL(string: UIApplicationOpenSettingsURLString)!
                 if UIApplication.sharedApplication().canOpenURL(url) {
                     UIApplication.sharedApplication().openURL(url)
@@ -75,6 +84,7 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
         locationManager.startUpdatingLocation()
     }
     
+    //MARK: - Protocol conformance
     //MARK:- 实现CLLocationManagerDelegate协议
     func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         currentLocation = locations.last
@@ -111,44 +121,58 @@ class WeatherViewController: UIViewController, CLLocationManagerDelegate {
                 }
             } else {
                 // 转换地理失败
+                print("error is : " + "\(error)")
             }
         })
     }
     
+    //MARK: - Private
+    // Networking
     private func networkRequest() {
+        
         let url = "http://api.map.baidu.com/telematics/v3/weather"
-        EXNetworking.get(url, params: ["location": self.currentCity, "output": "json", "ak": "A72e372de05e63c8740b2622d0ed8ab1"], callback: { (data, response, error) -> Void in
-            let string = NSString(data: data, encoding: NSUTF8StringEncoding) as! String
-            let returnData: NSData = string.dataUsingEncoding(NSUTF8StringEncoding)!
-            let jsonDict: AnyObject! = try? NSJSONSerialization.JSONObjectWithData(returnData, options: NSJSONReadingOptions.AllowFragments)
+        
+        request(.GET, url, parameters: ["location": self.currentCity, "output": "json", "ak": "A72e372de05e63c8740b2622d0ed8ab1"])
+            .response { (request, response, data, error) in
             
-            self.tempString = (((jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("date")?.componentsSeparatedByString("："))! as NSArray).objectAtIndex(1).componentsSeparatedByString("℃") as NSArray).objectAtIndex(0) as! String + "°"
-            self.weatherImgURL = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("dayPictureUrl")
-            self.weatherString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("weather")
-            self.PMString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("pm25")
-            self.carWashIndexZsString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("index")?.objectAtIndex(1).objectForKey("zs")
-            self.carWashIndexDesString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("index")?.objectAtIndex(1).objectForKey("des")
+            self.activity.stopAnimating()
+            self.activity.hidden = true
             
-            print(self.tempString)
-            print(self.weatherImgURL)
-            print(self.weatherString)
-            print(self.PMString)
-            print(self.carWashIndexZsString)
-            print(self.carWashIndexDesString)
-            
-            dispatch_async(dispatch_get_main_queue(), { 
-                self.weatherView.tempLabel.text = self.tempString as? String
-                self.weatherView.weatherLabel.text = self.weatherString as? String
-                self.weatherView.PMNumLabel.text = self.PMString as? String
-                self.weatherView.carWashIndexZsLabel.text = self.carWashIndexZsString as? String
-                self.weatherView.carWashIndexDesLabel.text = self.carWashIndexDesString as? String
+            if (error == nil) {
+                let string = NSString(data: data!, encoding: NSUTF8StringEncoding) as! String
+                let returnData: NSData = string.dataUsingEncoding(NSUTF8StringEncoding)!
+                let jsonDict: AnyObject! = try? NSJSONSerialization.JSONObjectWithData(returnData, options: NSJSONReadingOptions.AllowFragments)
                 
-                let imageUrl: NSURL = NSURL(string: self.weatherImgURL as! String)!
-                let imageData: NSData = NSData(contentsOfURL: imageUrl)!
-                let image = UIImage(data: imageData, scale: 1.0)
-                self.weatherView.weatherImage.image = image
-            })
-        })
+                self.tempString = (((jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("date")?.componentsSeparatedByString("："))! as NSArray).objectAtIndex(1).componentsSeparatedByString("℃") as NSArray).objectAtIndex(0) as! String + "°"
+                self.weatherImgURL = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("dayPictureUrl")
+                self.weatherString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("weather_data")?.objectAtIndex(0).objectForKey("weather")
+                self.PMString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("pm25")
+                self.carWashIndexZsString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("index")?.objectAtIndex(1).objectForKey("zs")
+                self.carWashIndexDesString = jsonDict.objectForKey("results")?.objectAtIndex(0).objectForKey("index")?.objectAtIndex(1).objectForKey("des")
+                
+                print("tempString is: " + String(self.tempString))
+                print("weatherImgURL is: " + String(self.weatherImgURL))
+                print("weatherString is: " + String(self.weatherString))
+                print("PMString is: " + String(self.PMString))
+                print("carWashIndexZsString is: " + String(self.carWashIndexZsString))
+                print("carWashIndexDesString is: " + String(self.carWashIndexDesString))
+                
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.weatherView.tempLabel.text = self.tempString as? String
+                    self.weatherView.weatherLabel.text = self.weatherString as? String
+                    self.weatherView.PMNumLabel.text = self.PMString as? String
+                    self.weatherView.carWashIndexZsLabel.text = self.carWashIndexZsString as? String
+                    self.weatherView.carWashIndexDesLabel.text = self.carWashIndexDesString as? String
+                    
+                    let imageUrl: NSURL = NSURL(string: self.weatherImgURL as! String)!
+                    let imageData: NSData = NSData(contentsOfURL: imageUrl)!
+                    let image = UIImage(data: imageData, scale: 1.0)
+                    self.weatherView.weatherImage.image = image
+                })
+            } else {
+                print("error is: " + "\(error)")
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {

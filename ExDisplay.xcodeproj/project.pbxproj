@@ -29,9 +29,8 @@
 		F63B49CB1CC9F1F30046F2FD /* MusicPlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49CA1CC9F1F30046F2FD /* MusicPlayerModel.swift */; };
 		F63B49CD1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49CC1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift */; };
 		F63B49D01CCA252F0046F2FD /* WeatherView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49CF1CCA252F0046F2FD /* WeatherView.swift */; };
-		F63B49D21CCA25E40046F2FD /* EXNetworking.swift in Sources */ = {isa = PBXBuildFile; fileRef = F63B49D11CCA25E40046F2FD /* EXNetworking.swift */; };
-		F6A416E41CD9F15C00780B78 /* ExAuto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A416E31CD9F15C00780B78 /* ExAuto.framework */; };
-		F6A416E51CD9F15C00780B78 /* ExAuto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F6A416E31CD9F15C00780B78 /* ExAuto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		F6A416E81CD9F66200780B78 /* ExAuto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6A416E71CD9F66200780B78 /* ExAuto.framework */; };
+		F6A416E91CD9F66200780B78 /* ExAuto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F6A416E71CD9F66200780B78 /* ExAuto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,13 +51,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		843481271CC9ED7C00BEC03D /* Embed Frameworks */ = {
+		F6A416EA1CD9F66200780B78 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F6A416E51CD9F15C00780B78 /* ExAuto.framework in Embed Frameworks */,
+				F6A416E91CD9F66200780B78 /* ExAuto.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -93,8 +92,8 @@
 		F63B49CA1CC9F1F30046F2FD /* MusicPlayerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerModel.swift; sourceTree = "<group>"; };
 		F63B49CC1CC9FB5D0046F2FD /* MusicPlayerListTabelView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerListTabelView.swift; sourceTree = "<group>"; };
 		F63B49CF1CCA252F0046F2FD /* WeatherView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherView.swift; sourceTree = "<group>"; };
-		F63B49D11CCA25E40046F2FD /* EXNetworking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EXNetworking.swift; sourceTree = "<group>"; };
 		F6A416E31CD9F15C00780B78 /* ExAuto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ExAuto.framework; path = "/Users/lihao/Library/Developer/Xcode/DerivedData/ExDisplay-aaecvtslkedkqyeoknvguetyaxod/Build/Products/Debug-iphonesimulator/ExAuto.framework"; sourceTree = "<absolute>"; };
+		F6A416E71CD9F66200780B78 /* ExAuto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; name = ExAuto.framework; path = "/Users/lihao/Library/Developer/Xcode/DerivedData/ExDisplay-aaecvtslkedkqyeoknvguetyaxod/Build/Products/Debug-iphoneos/ExAuto.framework"; sourceTree = "<absolute>"; };
 		FB32D13AD2965A41CC237B6B /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -103,7 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F6A416E41CD9F15C00780B78 /* ExAuto.framework in Frameworks */,
+				F6A416E81CD9F66200780B78 /* ExAuto.framework in Frameworks */,
 				9A69ECEADF4DD662E537AF0C /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,7 +174,6 @@
 			children = (
 				84E2E0A21CC9BD95002A39F1 /* WeatherViewController.swift */,
 				F63B49CF1CCA252F0046F2FD /* WeatherView.swift */,
-				F63B49D11CCA25E40046F2FD /* EXNetworking.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -183,6 +181,7 @@
 		92AD8E971CBB413300C6EF14 = {
 			isa = PBXGroup;
 			children = (
+				F6A416E71CD9F66200780B78 /* ExAuto.framework */,
 				F6A416E31CD9F15C00780B78 /* ExAuto.framework */,
 				92AD8EA21CBB413300C6EF14 /* ExDisplay */,
 				92AD8EBA1CBB413300C6EF14 /* ExDisplayTests */,
@@ -268,9 +267,9 @@
 				92AD8E9C1CBB413300C6EF14 /* Sources */,
 				92AD8E9D1CBB413300C6EF14 /* Frameworks */,
 				92AD8E9E1CBB413300C6EF14 /* Resources */,
-				843481271CC9ED7C00BEC03D /* Embed Frameworks */,
 				C16FCC0E983F8870D135D13E /* Embed Pods Frameworks */,
 				1501C4554E220DB68CB93913 /* Copy Pods Resources */,
+				F6A416EA1CD9F66200780B78 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -452,7 +451,6 @@
 				F63B49C71CC9F1C60046F2FD /* MusicPlayerView.swift in Sources */,
 				92AD8EAC1CBB413300C6EF14 /* ExDisplay.xcdatamodeld in Sources */,
 				F63B49CB1CC9F1F30046F2FD /* MusicPlayerModel.swift in Sources */,
-				F63B49D21CCA25E40046F2FD /* EXNetworking.swift in Sources */,
 				92AD8EA41CBB413300C6EF14 /* AppDelegate.swift in Sources */,
 				84E2E09D1CC9BD79002A39F1 /* ContactsViewController.swift in Sources */,
 			);

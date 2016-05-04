@@ -75,7 +75,7 @@ class WeatherView: UIView {
         tempLabel.textColor = UIColor.whiteColor()
         
         weatherImage.translatesAutoresizingMaskIntoConstraints = false
-        let weatherImageContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherImage, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 39.0)
+        let weatherImageContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherImage, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 10.0)
         let weatherImageContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherImage, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 120.0)
         let weatherImageContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherImage, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 15.0)
         let weatherImageContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherImage, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 22.0)
@@ -84,21 +84,22 @@ class WeatherView: UIView {
         weatherImage.image = UIImage(named: "homeWeather-cloudy")
         
         weatherLabel.translatesAutoresizingMaskIntoConstraints = false
-        let weatherLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 72.0)
+        let weatherLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 35.0)
         let weatherLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 112.0)
         let weatherLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 29.0)
-        let weatherLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 119.0)
+        let weatherLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: weatherLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 155.0)
         let weatherLabelContrains: NSArray = [weatherLabelContrainTop, weatherLabelContrainWidth, weatherLabelContrainHeight, weatherLabelContrainLeading]
         self.addConstraints(weatherLabelContrains as! [NSLayoutConstraint])
         weatherLabel.font = UIFont.systemFontOfSize(20.0)
-        weatherLabel.text = "多云转晴"
+        weatherLabel.text = "--"
         weatherLabel.textColor = UIColor.whiteColor()
+        weatherLabel.textAlignment = .Center
         
         PMLabel.translatesAutoresizingMaskIntoConstraints = false
-        let PMLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: PMLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 40.0)
+        let PMLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: PMLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 10.0)
         let PMLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: PMLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 145.0)
         let PMLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: PMLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 29.0)
-        let PMLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: PMLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 60.0)
+        let PMLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: PMLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100.0)
         let PMLabelContrains: NSArray = [PMLabelContrainTop, PMLabelContrainWidth, PMLabelContrainHeight, PMLabelContrainLeading]
         self.addConstraints(PMLabelContrains as! [NSLayoutConstraint])
         PMLabel.font = UIFont.systemFontOfSize(20.0)
@@ -106,38 +107,40 @@ class WeatherView: UIView {
         PMLabel.textColor = UIColor.whiteColor()
         
         PMNumLabel.translatesAutoresizingMaskIntoConstraints = false
-        let PMNumLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 115.0)
-        let PMNumLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 139.0)
-        let PMNumLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 41.0)
-        let PMNumLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 45.0)
+        let PMNumLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Leading, relatedBy: .Equal, toItem: PMLabel, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
+        let PMNumLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 145.0)
+        let PMNumLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 26.0)
+        let PMNumLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: PMNumLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 80.0)
         let PMNumLabelContrains: NSArray = [PMNumLabelContrainTop, PMNumLabelContrainWidth, PMNumLabelContrainHeight, PMNumLabelContrainLeading]
         self.addConstraints(PMNumLabelContrains as! [NSLayoutConstraint])
         PMNumLabel.font = UIFont.systemFontOfSize(25.0)
-        PMNumLabel.text = "15"
+        PMNumLabel.text = "--"
         PMNumLabel.textColor = UIColor.whiteColor()
+        PMNumLabel.textAlignment = .Center
         
         carWashIndexLabel.translatesAutoresizingMaskIntoConstraints = false
-        let carWashIndexLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 20.0)
+        let carWashIndexLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 10.0)
         let carWashIndexLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 175.0)
         let carWashIndexLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 26.0)
-        let carWashIndexLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 96.0)
+        let carWashIndexLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 100.0)
         let carWashIndexLabelContrains: NSArray = [carWashIndexLabelContrainTop, carWashIndexLabelContrainWidth, carWashIndexLabelContrainHeight, carWashIndexLabelContrainLeading]
         self.addConstraints(carWashIndexLabelContrains as! [NSLayoutConstraint])
-        carWashIndexLabel.font = UIFont.systemFontOfSize(19.0)
+        carWashIndexLabel.font = UIFont.systemFontOfSize(20.0)
         carWashIndexLabel.text = "洗车指数："
         carWashIndexLabel.textColor = UIColor.whiteColor()
-
+        
         carWashIndexZsLabel.translatesAutoresizingMaskIntoConstraints = false
-        let carWashIndexZsLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexZsLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 117.0)
+        let carWashIndexZsLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexZsLabel, attribute: .Leading, relatedBy: .Equal, toItem: carWashIndexLabel, attribute: .Trailing, multiplier: 1.0, constant: 0.0)
         let carWashIndexZsLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexZsLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 175.0)
         let carWashIndexZsLabelContrainHeight: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexZsLabel, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 26.0)
-        let carWashIndexZsLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexZsLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 79.0)
+        let carWashIndexZsLabelContrainWidth: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexZsLabel, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1.0, constant: 80.0)
         let carWashIndexZsLabelContrains: NSArray = [carWashIndexZsLabelContrainTop, carWashIndexZsLabelContrainWidth, carWashIndexZsLabelContrainHeight, carWashIndexZsLabelContrainLeading]
         self.addConstraints(carWashIndexZsLabelContrains as! [NSLayoutConstraint])
-        carWashIndexZsLabel.font = UIFont.systemFontOfSize(19.0)
-        carWashIndexZsLabel.text = "较适宜"
+        carWashIndexZsLabel.font = UIFont.systemFontOfSize(20.0)
+        carWashIndexZsLabel.text = "--"
         carWashIndexZsLabel.textColor = UIColor.whiteColor()
-
+        carWashIndexZsLabel.textAlignment = .Center
+        
         carWashIndexDesLabel.translatesAutoresizingMaskIntoConstraints = false
         let carWashIndexDesLabelContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexDesLabel, attribute: .Leading, relatedBy: .Equal, toItem: self, attribute: .Leading, multiplier: 1.0, constant: 13.0)
         let carWashIndexDesLabelContrainTop: NSLayoutConstraint = NSLayoutConstraint.init(item: carWashIndexDesLabel, attribute: .Top, relatedBy: .Equal, toItem: self, attribute: .Top, multiplier: 1.0, constant: 202.0)
@@ -147,7 +150,6 @@ class WeatherView: UIView {
         self.addConstraints(carWashIndexDesLabelContrains as! [NSLayoutConstraint])
         carWashIndexDesLabel.font = UIFont.systemFontOfSize(14.0)
         carWashIndexDesLabel.numberOfLines = 0
-        carWashIndexDesLabel.text = "较适宜洗车，未来一天无雨，风力较小，擦洗一新的汽车至少能保持一天。"
         carWashIndexDesLabel.textColor = UIColor.whiteColor()
     }
 }
