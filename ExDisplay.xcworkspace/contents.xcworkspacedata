@@ -5,9 +5,6 @@
       location = "group:ExAuto/ExAuto.xcodeproj">
    </FileRef>
    <FileRef
-      location = "container:ExDisplay.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:ExDisplay.xcodeproj">
    </FileRef>
    <FileRef
