@@ -1,20 +1,19 @@
 //
-//  BaseViewController.swift
+//  LauncherViewController.swift
 //  ExDisplay
 //
-//  Created by elsie on 16/4/11.
+//  Created by elsie on 16/4/20.
 //  Copyright © 2016年 AppStudio. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import ExAuto
 
-let BTN_BACK = 0;
-
-class BaseViewController: UIViewController,ExDisplayControlProtocol {
-
-    var defaultFocusView : UIView!
+class LauncherViewController: UIViewController,ExDisplayControlProtocol {
+    
     var secondScreenView : UIView?
+    var defaultFocusView : UIView?
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         
@@ -29,19 +28,32 @@ class BaseViewController: UIViewController,ExDisplayControlProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initView()
+        secondScreenView = self.view
         ExControlCenter.sharedInstance()!.displayControlDelegate = self
         ExControlCenter.sharedInstance()!.setFocusForView(defaultFocusView)
-        secondScreenView = self.view
-        
     }
-
+    
     override func didReceiveMemoryWarning() {
+        
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
-// ExControlProtocol
-    func confirm() {
+    func initView() {
+        self.view = UIView(frame:CGRectZero)
+        
+        let backImg = UIImage(named: "homeLauncherBg")
+        let backImgView = UIImageView(image: backImg)
+        backImgView.frame = UIScreen.screens()[1].bounds
+        self.view.addSubview(backImgView)
+        
+    }
+    
+
+    //MARK: - ExDisplayControlProtocol
+    func confirm(){
+        
         let curView : UIView? = ExControlCenter.sharedInstance()!.focusView
         let viewTag : Int = curView!.tag
         switch viewTag {
@@ -53,37 +65,22 @@ class BaseViewController: UIViewController,ExDisplayControlProtocol {
             
         }
     }
-   
-    func back() {
+    func back(){
         
     }
-    
-    func voiceChange(voiceAmountScale:Float) {
+    func voiceChange(voiceAmountScale:Float){
         
     }
-    
-    func showMenu() {
+    func showMenu(){
         
     }
-    
-    func hideMenu() {
+    func hideMenu(){
         
     }
-    
-    func showSiri() {
+    func showSiri(){
         
     }
-    
-    func hideSiri() {
-        
-    }
-    
-    func performOrderWithString(order:ExVROrder, str:String?){
-        
-    }
-    
-    func BLEStatus(status:Bool){
+    func hideSiri(){
         
     }
 }
-
