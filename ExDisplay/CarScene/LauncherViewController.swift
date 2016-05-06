@@ -80,16 +80,15 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         backImgView.frame = UIScreen.screens()[1].bounds
         self.view.addSubview(backImgView)
         
-        weatherView = WeatherView.init(frame: CGRect(x: 1920 - 225, y: 100, width: 195, height: 295))
+        weatherView = WeatherView.init(frame: CGRect(x: 1920 - 429, y: 100, width: 390, height: 490))
         self.view.addSubview(weatherView)
         
-        self.activity = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 35, height: 35))
-        self.activity.center = CGPoint(x: 100, y: 130)
+        self.activity = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        self.activity.center = CGPoint(x: 175, y: 225)
         self.activity.activityIndicatorViewStyle = .White
         weatherView.addSubview(self.activity)
         self.activity.startAnimating()
         
-        initLocation()
         initMusiPlayer()
         initBaseView()
     }
@@ -140,79 +139,6 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         musicPlayerView = MusicPlayerView.init(frame: CGRect(x: 200, y: 1080 - 160, width: 1520, height: 60))
         self.view.addSubview(musicPlayerView)
         
-        // 添加MusicPlayerView中控件点击事件
-        musicPlayerView.playPauseButton.addTarget(self, action: #selector(handlePlayStatusButtonClick(_:)), forControlEvents: .TouchUpInside)
-        musicPlayerView.playNextButton.addTarget(self, action: #selector(handlePlayStatusButtonClick(_:)), forControlEvents: .TouchUpInside)
-        musicPlayerView.playPreviousButton.addTarget(self, action: #selector(handlePlayStatusButtonClick(_:)), forControlEvents: .TouchUpInside)
-        musicPlayerView.playMenuButton.addTarget(self, action: #selector(handlePlayStatusButtonClick(_:)), forControlEvents: .TouchUpInside)
-    }
-    
-    //MARK: - Public
-    
-    //MARK: - IBActions
-    func handlePlayStatusButtonClick(sender: UIButton) -> Void {
-        switch sender {
-        case musicPlayerView.playPauseButton:
-            if musicListNameArray.count == 0 {
-                return
-            } else{
-                if isPlaying {
-                    isPlaying = false
-                    musicPlayer.musicPause()
-                } else {
-                    isPlaying = true
-                    musicPlayer.musicPlay()
-                }
-            }
-            break
-        case musicPlayerView.playNextButton:
-            musicPlayer.musicPlayNext()
-            break
-        case musicPlayerView.playPreviousButton:
-            musicPlayer.musicPlayPrevious()
-            break
-        case musicPlayerView.playMenuButton:
-            
-            break
-        default:
-            break
-        }
-    }
-    
-    //MARK: - Protocol conformance
-    
-    //MARK: - MusicPlayerDelegate
-    func musicPlayer(musicPlayer: MusicPlayer, updatePlaybackCurrentTime currentTime: NSTimeInterval, playbackDurationTime durationTime: NSTimeInterval) {
-        musicPlayerView.playProgressBar.progress = Float(currentTime / durationTime)
-    }
-    
-    func musicPlayer(musicPlayer: MusicPlayer, didChangeNowPlayingItem nowPlayingItem: MPMediaItem) {
-        
-    }
-    
-    func musicPlayer(musicPlayer: MusicPlayer, didChangePlaybackState playbackState: MPMusicPlaybackState) {
-        switch playbackState {
-        case .Stopped:
-            
-            break
-        case .Playing:
-            musicPlayerView.playPauseButton.setBackgroundImage(UIImage(named: "homeMusic-pause"), forState: .Normal)
-            break
-        case .SeekingForward:
-            
-            break
-        case .SeekingBackward:
-            
-            break
-        case .Paused:
-            musicPlayerView.playPauseButton.setBackgroundImage(UIImage(named: "homeMusic-play"), forState: .Normal)
-            break
-        default:
-            break
-        }
-    }
-    
-    func initLocation() {
         locationManager.delegate = self
         locationManager.requestAlwaysAuthorization()
         
@@ -224,21 +150,8 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         locationManager.startUpdatingLocation()
     }
     
-    //MARK: - Protocol conformance
-    //MARK:- 实现CLLocationManagerDelegate协议
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = locations.last
-        print(currentLocation.coordinate.longitude)
-        print(currentLocation.coordinate.latitude)
-        reverseGeocode()
-    }
-    
-    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
-        print(error)
-    }
-    
     // 将经纬度转换为城市名
-    func reverseGeocode() {
+    private func reverseGeocode() {
         let geocoder = CLGeocoder()
         var mark:CLPlacemark?
         
@@ -256,6 +169,11 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
                     
                     let location: String = (self.currentCity as String) + "，" + (self.SubLocality as String)
                     self.weatherView.locationLabel.text = location
+                    var locationLabelFont: CGFloat = self.weatherView.locationLabel.frame.size.width / CGFloat(location.characters.count)
+                    if locationLabelFont > 25.0 {
+                        locationLabelFont = 25.0
+                    }
+                    self.weatherView.locationLabel.font = UIFont.systemFontOfSize(locationLabelFont)
                     
                     self.networkRequest()
                 }
@@ -266,7 +184,6 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         })
     }
     
-    //MARK: - Private
     // Networking
     private func networkRequest() {
         
@@ -308,6 +225,25 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
                         let imageData: NSData = NSData(contentsOfURL: imageUrl)!
                         let image = UIImage(data: imageData, scale: 1.0)
                         self.weatherView.weatherImage.image = image
+                        
+                        self.weatherView.tempLabel.font = UIFont.systemFontOfSize(self.weatherView.tempLabel.frame.size.width / 3)
+                        var weatherLabelFont: CGFloat = self.weatherView.weatherLabel.frame.size.width / CGFloat(((self.weatherString as? String)?.characters.count)!)
+                        if weatherLabelFont > 25.0 {
+                            weatherLabelFont = 25.0
+                        }
+                        self.weatherView.weatherLabel.font = UIFont.systemFontOfSize(weatherLabelFont)
+                        let carWashIndexDesStringLength: CGFloat = CGFloat(((self.carWashIndexDesString as? String)?.characters.count)!)
+                        var carWashIndexDesStringFont: CGFloat = self.weatherView.carWashIndexDesLabel.frame.size.width / CGFloat(carWashIndexDesStringLength / 3 + 1)
+                        if carWashIndexDesStringFont > 25.0 {
+                            carWashIndexDesStringFont = 25.0
+                        }
+                        self.weatherView.carWashIndexDesLabel.font = UIFont.systemFontOfSize(carWashIndexDesStringFont)
+                        var carWashIndexLabelFont: CGFloat = self.weatherView.carWashIndexLabel.frame.size.width / 5
+                        if carWashIndexLabelFont > carWashIndexDesStringFont {
+                            carWashIndexLabelFont = 25.0
+                        }
+                        self.weatherView.carWashIndexLabel.font = UIFont.systemFontOfSize(carWashIndexLabelFont)
+                        self.weatherView.PMLabel.font = self.weatherView.carWashIndexLabel.font
                     })
                 } else {
                     print("error is: " + "\(error)")
@@ -315,7 +251,52 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         }
     }
     
-
+    //MARK: - Public
+    
+    //MARK: - Protocol conformance
+    //MARK: - MusicPlayerDelegate
+    func musicPlayer(musicPlayer: MusicPlayer, updatePlaybackCurrentTime currentTime: NSTimeInterval, playbackDurationTime durationTime: NSTimeInterval) {
+        musicPlayerView.playProgressBar.progress = Float(currentTime / durationTime)
+    }
+    
+    func musicPlayer(musicPlayer: MusicPlayer, didChangeNowPlayingItem nowPlayingItem: MPMediaItem) {
+        print(nowPlayingItem.title)
+    }
+    
+    func musicPlayer(musicPlayer: MusicPlayer, didChangePlaybackState playbackState: MPMusicPlaybackState) {
+        switch playbackState {
+        case .Stopped:
+            
+            break
+        case .Playing:
+            musicPlayerView.playPauseButton.setBackgroundImage(UIImage(named: "homeMusic-pause"), forState: .Normal)
+            break
+        case .SeekingForward:
+            
+            break
+        case .SeekingBackward:
+            
+            break
+        case .Paused:
+            musicPlayerView.playPauseButton.setBackgroundImage(UIImage(named: "homeMusic-play"), forState: .Normal)
+            break
+        default:
+            break
+        }
+    }
+    
+    //MARK:- 实现CLLocationManagerDelegate协议
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        currentLocation = locations.last
+        print(currentLocation.coordinate.longitude)
+        print(currentLocation.coordinate.latitude)
+        reverseGeocode()
+    }
+    
+    func locationManager(manager: CLLocationManager, didFailWithError error: NSError) {
+        print(error)
+    }
+    
     //MARK: - ExDisplayControlProtocol
     func confirm(){
         
@@ -323,6 +304,25 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         let viewTag : Int = curView!.tag
         switch viewTag {
         case 0:
+            break
+        case 1001:
+            musicPlayer.musicPlayPrevious()
+            break
+        case 1002:
+            if musicListNameArray.count == 0 {
+                return
+            } else{
+                if isPlaying {
+                    isPlaying = false
+                    musicPlayer.musicPause()
+                } else {
+                    isPlaying = true
+                    musicPlayer.musicPlay()
+                }
+            }
+            break
+        case 1003:
+            musicPlayer.musicPlayNext()
             break
             
         default:
