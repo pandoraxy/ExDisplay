@@ -49,6 +49,7 @@ class MusicPlayerView: UIView {
         let playPreviousButtonContrains: NSArray = [playPreviousButtonContrainTop, playPreviousButtonContrainWidth, playPreviousButtonContrainHeight, playPreviousButtonContrainLeading]
         self.addConstraints(playPreviousButtonContrains as! [NSLayoutConstraint])
         playPreviousButton.setBackgroundImage(UIImage(named: "homeMusic-previousMusic"), forState: .Normal)
+        playPreviousButton.tag = 1001
         
         playPauseButton.translatesAutoresizingMaskIntoConstraints = false
         let playPauseButtonContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: playPauseButton, attribute: .Leading, relatedBy: .Equal, toItem: playPreviousButton, attribute: .Trailing, multiplier: 1.0, constant: 10.0)
@@ -58,6 +59,7 @@ class MusicPlayerView: UIView {
         let playPauseButtonContrains: NSArray = [playPauseButtonContrainTop, playPauseButtonContrainWidth, playPauseButtonContrainHeight, playPauseButtonContrainLeading]
         self.addConstraints(playPauseButtonContrains as! [NSLayoutConstraint])
         playPauseButton.setBackgroundImage(UIImage(named: "homeMusic-play"), forState: .Normal)
+        playPauseButton.tag = 1002
         
         playNextButton.translatesAutoresizingMaskIntoConstraints = false
         let playNextButtonContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: playNextButton, attribute: .Leading, relatedBy: .Equal, toItem: playPauseButton, attribute: .Trailing, multiplier: 1.0, constant: 10.0)
@@ -67,6 +69,7 @@ class MusicPlayerView: UIView {
         let playNextButtonContrains: NSArray = [playNextButtonContrainTop, playNextButtonContrainWidth, playNextButtonContrainHeight, playNextButtonContrainLeading]
         self.addConstraints(playNextButtonContrains as! [NSLayoutConstraint])
         playNextButton.setBackgroundImage(UIImage(named: "homeMusic-nextMusic"), forState: .Normal)
+        playNextButton.tag = 1003
         
         playMenuButton.translatesAutoresizingMaskIntoConstraints = false
         let playMenuButtonContrainTrailing: NSLayoutConstraint = NSLayoutConstraint.init(item: playMenuButton, attribute: .Trailing, relatedBy: .Equal, toItem: self, attribute: .Trailing, multiplier: 1.0, constant: -10.0)
@@ -76,6 +79,7 @@ class MusicPlayerView: UIView {
         let playMenuButtonContrains: NSArray = [playMenuButtonContrainTop, playMenuButtonContrainWidth, playMenuButtonContrainHeight, playMenuButtonContrainTrailing]
         self.addConstraints(playMenuButtonContrains as! [NSLayoutConstraint])
         playMenuButton.setBackgroundImage(UIImage(named: "homeMusic-menu"), forState: .Normal)
+        playMenuButton.tag = 1004
         
         playProgressBar.translatesAutoresizingMaskIntoConstraints = false
         let playProgressBarContrainLeading: NSLayoutConstraint = NSLayoutConstraint.init(item: playProgressBar, attribute: .Leading, relatedBy: .Equal, toItem: playNextButton, attribute: .Trailing, multiplier: 1.0, constant: 10.0)
