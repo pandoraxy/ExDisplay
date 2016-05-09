@@ -1,7 +1,7 @@
 //
 //  PhoneViewController.swift
 //  ExDisplay
-//
+//  手机屏幕view
 //  Created by elsie on 16/4/11.
 //  Copyright © 2016年 AppStudio. All rights reserved.
 //

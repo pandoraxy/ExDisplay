@@ -1,7 +1,7 @@
 //
 //  LauncherViewController.swift
 //  ExDisplay
-//
+//  二屏的主界面
 //  Created by elsie on 16/4/20.
 //  Copyright © 2016年 AppStudio. All rights reserved.
 //
@@ -18,6 +18,10 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
     
     var secondScreenView : UIView?
     var defaultFocusView : UIView?
+    
+    var dateLabelForDay : UILabel?
+    var dateLabelForWeek : UILabel?
+    var dateLabelForMonth : UILabel?
     
     var weatherView = WeatherView()
     var tempString: AnyObject!
@@ -72,6 +76,7 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         // Dispose of any resources that can be recreated.
     }
 
+    //view布局
     func initView() {
         self.view = UIView(frame:CGRectZero)
         
@@ -79,6 +84,64 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
         let backImgView = UIImageView(image: backImg)
         backImgView.frame = UIScreen.screens()[1].bounds
         self.view.addSubview(backImgView)
+        
+        let sideBarBg = UIImage(named: "homeSidebar")
+        let sideBarBgView = UIImageView(image: sideBarBg)
+        sideBarBgView.frame = CGRectMake(0, UIScreen.screens()[1].bounds.height/2-150, 71, 295)
+        self.view.addSubview(sideBarBgView)
+        
+        let phoneBtn = UIButton()
+        phoneBtn.frame = CGRectMake(5, 40, 56, 56)
+        phoneBtn.setImage(UIImage(named: "homeCall"), forState: UIControlState.Normal)
+        phoneBtn.tag = 2000
+        sideBarBgView.addSubview(phoneBtn)
+        
+        let albumBtn = UIButton()
+        albumBtn.frame = CGRectMake(5, sideBarBgView.frame.height/2-28, 56, 56)
+        albumBtn.setImage(UIImage(named: "homeAlbum"), forState: UIControlState.Normal)
+        albumBtn.tag = 2001
+        sideBarBgView.addSubview(albumBtn)
+        
+        let voiceBtn = UIButton()
+        voiceBtn.frame = CGRectMake(5, sideBarBgView.frame.height-40-56, 56, 56)
+        voiceBtn.setImage(UIImage(named: "homeVoice"), forState: UIControlState.Normal)
+        voiceBtn.tag = 2002
+        sideBarBgView.addSubview(voiceBtn)
+        
+        let settingBtn = UIButton()
+        settingBtn.frame = CGRectMake(5, UIScreen.screens()[1].bounds.height-50-56, 56, 56)
+        settingBtn.setImage(UIImage(named: "homeSetting"), forState: UIControlState.Normal)
+        settingBtn.tag = 2003
+        backImgView.addSubview(settingBtn)
+        
+        let dateImgBg = UIImage(named: "homeDate")
+        let dateView = UIImageView(image: dateImgBg)
+        dateView.frame = CGRectMake(120, 0, 250, 88)
+        self.view.addSubview(dateView)
+        
+        dateLabelForDay = UILabel()
+        dateLabelForDay?.frame = CGRectMake(0, 0, 85, 88)
+        dateLabelForDay?.textColor = UIColor.whiteColor()
+        dateLabelForDay?.textAlignment = NSTextAlignment.Center
+        dateLabelForDay?.font = UIFont.systemFontOfSize(70.0)
+        dateView.addSubview(dateLabelForDay!)
+        
+        dateLabelForWeek = UILabel()
+        dateLabelForWeek?.frame = CGRectMake(86, 0, 165, 44)
+        dateLabelForWeek?.textColor = UIColor.whiteColor()
+        dateLabelForWeek?.textAlignment = NSTextAlignment.Center
+        dateLabelForWeek?.font = UIFont.systemFontOfSize(25.0)
+        dateView.addSubview(dateLabelForWeek!)
+        
+        dateLabelForMonth = UILabel()
+        dateLabelForMonth?.frame = CGRectMake(86, 44, 165, 44)
+        dateLabelForMonth?.textColor = UIColor.whiteColor()
+        dateLabelForMonth?.textAlignment = NSTextAlignment.Center
+        dateLabelForMonth?.font = UIFont.systemFontOfSize(20.0)
+        dateView.addSubview(dateLabelForMonth!)
+
+        getDate()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getDate), name: NSCalendarDayChangedNotification, object: nil)
         
         weatherView = WeatherView.init(frame: CGRect(x: 1920 - 225, y: 100, width: 195, height: 295))
         self.view.addSubview(weatherView)
@@ -113,6 +176,15 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
             alert.addAction(okAction)
             self.presentViewController(alert, animated: true, completion: nil)
         }
+    }
+    
+    @objc func getDate() {
+        let date = NSDate.init()
+        let calendar : NSCalendar = NSCalendar.autoupdatingCurrentCalendar()
+        let components : NSDateComponents = calendar.components([NSCalendarUnit.Day, NSCalendarUnit.Weekday, NSCalendarUnit.Month, NSCalendarUnit.Year], fromDate: date)
+        dateLabelForDay?.text = String.init(format: "%d", components.day)
+        dateLabelForWeek?.text = String.init(calendar.weekdaySymbols[components.weekday])
+        dateLabelForMonth?.text = String.init(format: "%d年%d月%d日", components.year,components.month,components.day)
     }
     
     //MARK: - Private
