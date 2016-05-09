@@ -142,8 +142,8 @@ class LauncherViewController: UIViewController,ExDisplayControlProtocol, CLLocat
 
         getDate()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(getDate), name: NSCalendarDayChangedNotification, object: nil)
-        
-        weatherView = WeatherView.init(frame: CGRect(x: 1920 - 225, y: 100, width: 195, height: 295))
+
+        weatherView = WeatherView.init(frame: CGRect(x: 1920 - 429, y: 100, width: 390, height: 490))
         self.view.addSubview(weatherView)
         
         self.activity = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
