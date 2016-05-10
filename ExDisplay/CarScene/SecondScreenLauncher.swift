@@ -1,7 +1,7 @@
 //
 //  SecondScreenLauncher.swift
 //  ExDisplay
-//
+//  管理二屏的显示，连接，断开的处理
 //  Created by elsie on 16/4/28.
 //  Copyright © 2016年 AppStudio. All rights reserved.
 //
@@ -13,7 +13,7 @@ class SecondScreenLauncher {
     
     var secondWindow : UIWindow?
     
-    
+    //第二屏的显示
     func initSecondScreen() -> Bool {
         if UIScreen.screens().count > 1 {
             let secondScreen : UIScreen? = UIScreen.screens()[1]
@@ -25,7 +25,7 @@ class SecondScreenLauncher {
             
             let carViewController = LauncherViewController()
             let naviController = UINavigationController(rootViewController: carViewController)
-//            naviController.navigationBarHidden = true;
+            naviController.navigationBarHidden = true;
             
             self.secondWindow?.rootViewController = naviController
             self.secondWindow?.makeKeyAndVisible()
@@ -35,6 +35,7 @@ class SecondScreenLauncher {
         return false
     }
     
+    //收到连接二屏的通知，触发的回调方法，进行二屏显示
     @objc func handleScreenDidConnectNotification(note:NSNotification) {
         let newScreen = note.object as! UIScreen
         
@@ -55,6 +56,7 @@ class SecondScreenLauncher {
         }
     }
     
+    //收到二屏断开的通知，触发的回调方法，进行二屏显示
     @objc func handleScreenDidDisconnectNotification(note:NSNotification){
         if (self.secondWindow != nil) {
             self.secondWindow!.hidden = true;
